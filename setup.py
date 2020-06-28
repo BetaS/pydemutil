@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='dem-util',
-    version='1.0.2',
+    version='1.0.3',
     url="https://github.com/BetaS/pydemutil",
     author="BetaS",
     author_email="thou1999@gmail.com",
@@ -14,8 +14,7 @@ setup(
         'scipy',
         'pyproj',
         'shapely',
-        'cairocffi',
-        'scour'
+        'cairocffi'
     ],
     include_package_data=True,
     zip_safe=False,
