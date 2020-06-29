@@ -4,7 +4,7 @@ import math
 import io
 
 
-__alpha__ = 0.4
+__alpha__ = 0.8
 
 
 __COLORS__ = [
@@ -67,18 +67,26 @@ def get_image(shape, vectors):
         context.rectangle(x, y, 10, 10)
         context.fill()
 
-    # 윤곽선 그리기
+    # 외곽 흐리게 처리
+    context.move_to(start[0], start[1])
+    context.line_to(start[0]+width, start[1])
+    context.line_to(start[0]+width, start[1]+height)
+    context.line_to(start[0], start[1]+height)
+    context.line_to(start[0], start[1])
     draw_polygon(context, shape)
+    context.clip()
 
-    context.set_line_width(2.0)
+    context.set_source_rgba(1.0, 1.0, 1.0, 0.8)
+    context.paint()
+
+    # 윤곽선 그리기
+    context.reset_clip()
+
     context.set_source_rgb(0.0, 123/255, 1.0)
-    context.stroke_preserve()
+    context.set_line_width(2.0)
+    draw_polygon(context, shape)
+    context.stroke()
 
-    context.set_source_rgba(0.0, 0.0, 0.0, 0.8)
-    context.set_operator(cairo.OPERATOR_OVERLAY)
-    context.fill()
-
-    # surface 에 그리기
     surface.finish()
 
     # optimization
@@ -97,7 +105,5 @@ def get_image(shape, vectors):
 
     source = svg.getvalue().decode()
     # output = scour.scourString(source, options)
-
-    print(len(source))
 
     return source

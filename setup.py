@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='dem-util',
-    version='1.0.3',
+    version='1.0.4',
     url="https://github.com/BetaS/pydemutil",
     author="BetaS",
     author_email="thou1999@gmail.com",
